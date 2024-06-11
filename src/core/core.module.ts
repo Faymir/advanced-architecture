@@ -3,7 +3,16 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApplicationBootstrapOptions } from 'src/common/interfaces/application-bootstrap-options.interface';
-@Module({})
+import { EVENT_STORE_CONNECTION } from './core.constants';
+@Module({
+  imports: [
+    // eslint-disable-next-line prettier/prettier
+    MongooseModule.forRoot(process.env.MONGO_EVENT_STORE_URI, { // 👈 from docker-compose
+      connectionName: EVENT_STORE_CONNECTION, // 👈 our new namespace for this mongodb
+      directConnection: true, // 👈 needed needed to connect to local replica sets
+    }),
+  ],
+})
 export class CoreModule {
   static forRoot(options: ApplicationBootstrapOptions) {
     const imports =
