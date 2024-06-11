@@ -1,8 +1,8 @@
+import 'dotenv/config';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApplicationBootstrapOptions } from 'src/common/interfaces/application-bootstrap-options.interface';
-
 @Module({})
 export class CoreModule {
   static forRoot(options: ApplicationBootstrapOptions) {
@@ -13,14 +13,13 @@ export class CoreModule {
             // but you can use a configuration file or environment variables
             TypeOrmModule.forRoot({
               type: 'postgres',
-              host: 'localhost',
-              port: 5432,
-              password: 'postgres',
-              username: 'postgres',
+              host: process.env.PG_HOST,
+              username: process.env.PG_USERNAME,
+              password: process.env.PG_PASSWORD,
               autoLoadEntities: true,
               synchronize: true,
             }),
-            MongooseModule.forRoot('mongodb://localhost:27017/vf-read-db'),
+            MongooseModule.forRoot(process.env.MONGO_URI),
           ]
         : [];
 
