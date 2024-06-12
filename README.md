@@ -1,5 +1,5 @@
 ## Description
-This project demonstrates how to use Hexagonal/ onion architecture with some DDD (Domain Driven Devlopment) concept and the CQRS ( Command Query Responsibility Segregation) pattern in a NestJS application.
+This project demonstrates how to use Hexagonal/ onion architecture with some DDD (Domain Driven Devlopment) concept, the CQRS ( Command Query Responsibility Segregation) pattern and Event Sourcing pattern in a NestJS application.
 It uses PostgreSQl as the write model and MongoDB as the read model.
 It also supports in memory database by switching infrastructure layer in the `main.ts` file.
 
